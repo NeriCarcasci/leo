@@ -58,33 +58,11 @@ LEO follows a modular and structured execution pipeline for safety, accuracy, an
 
 📅 Ongoing: Bug fixes, security improvements, and community feedback incorporation.
 
-🚀 Getting Started
+# 🦁 LEO - AI-Powered Command Line Assistant
 
-📥 Installation
+## 📂 Project Structure
 
-git clone https://github.com/your-repo/leo.git
-cd leo
-pip install -r requirements.txt
-
-⚡ Usage Example
-
-leo "Create a new Docker container and start a web server"
-
-👀 Watch it in action! LEO will analyze, validate, and execute the necessary commands.
-
-🤝 Contributing
-
-🔗 We welcome contributions! Feel free to submit issues, feature requests, or pull requests to enhance LEO.
-
-📌 License
-
-📝 This project is open-source under the MIT License.
-
-🚀 Power up your command-line experience with LEO – your AI-driven assistant! 🚀
-
-
-
-“
+```
 LEO/
 │── client/                # CLI Tool (Python + Typer)
 │   ├── leo.py             # Main CLI entry point
@@ -144,4 +122,39 @@ LEO/
 │── README.md              # Project documentation
 │── LICENSE                # License file
 │── .gitignore             # Ignore files like __pycache__, .env, etc.
-“
+```
+
+## 📜 Description of Key Directories
+
+- **`client/`** → The CLI tool that allows users to interact with LEO.
+- **`server/`** → The backend API and execution engine that runs commands securely.
+- **`infra/`** → Infrastructure setup including Terraform, Kubernetes, CI/CD, and logging.
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/LEO.git
+   cd LEO
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r client/requirements.txt
+   pip install -r server/requirements.txt
+   ```
+3. Deploy infrastructure using Terraform:
+   ```bash
+   cd infra/terraform
+   terraform init
+   terraform apply
+   ```
+4. Deploy the server using Kubernetes:
+   ```bash
+   kubectl apply -f infra/kubernetes/
+   ```
+
+## 📌 Contributing
+Contributions are welcome! Open an issue or create a pull request to improve LEO.
+
+## 📜 License
+This project is licensed under the **MIT License**.
