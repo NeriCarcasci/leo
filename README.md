@@ -81,3 +81,67 @@ leo "Create a new Docker container and start a web server"
 📝 This project is open-source under the MIT License.
 
 🚀 Power up your command-line experience with LEO – your AI-driven assistant! 🚀
+
+
+
+“
+LEO/
+│── client/                # CLI Tool (Python + Typer)
+│   ├── leo.py             # Main CLI entry point
+│   ├── config.py          # Stores API endpoint & settings
+│   ├── prompts.py         # Handles interactive questioning
+│   ├── executor.py        # Manages command execution (manual & autonomous)
+│   ├── logger.py          # Logs local CLI execution history
+│   ├── secrets.py         # Retrieves secrets from Google Secret Manager
+│   ├── requirements.txt   # Dependencies for CLI
+│
+│── server/                # Backend API & Execution Engine (FastAPI + Google Cloud)
+│   ├── main.py            # FastAPI entry point (routes & logic)
+│   ├── routes.py          # API endpoint definitions
+│   ├── vertex_ai.py       # Handles LLM calls to Google Vertex AI
+│   ├── execution_engine.py # Secure command execution in Docker/gVisor
+│   ├── db.py              # PostgreSQL connection & ORM models
+│   ├── models.py          # Data models for logs, execution tracking
+│   ├── logging.py         # Sends logs to Cloud Logging
+│   ├── security.py        # Handles authentication, permissions
+│   ├── secrets.py         # Loads credentials from Google Secret Manager
+│   ├── config.py          # Config settings for the API
+│   ├── requirements.txt   # Dependencies for FastAPI backend
+│
+│── infra/                 # Infrastructure as Code (IaC) + CI/CD + Monitoring
+│   ├── terraform/         # Terraform configs for GCP services
+│   │   ├── main.tf        # Main Terraform file defining infrastructure
+│   │   ├── gke.tf         # Kubernetes cluster setup
+│   │   ├── vertex_ai.tf   # Google Vertex AI configuration
+│   │   ├── cloud_sql.tf   # PostgreSQL Cloud SQL setup
+│   │   ├── storage.tf     # Google Cloud Storage for logs
+│   │   ├── secret_manager.tf # Secrets management setup
+│   │   ├── outputs.tf     # Output variables (API URL, DB credentials, etc.)
+│   │   ├── providers.tf   # Google Cloud provider configuration
+│   │   ├── variables.tf   # Configurable variables for Terraform
+│   │
+│   ├── kubernetes/        # Kubernetes manifests for GKE
+│   │   ├── deployment.yaml # Deployment config for LEO API
+│   │   ├── service.yaml    # Service config (LoadBalancer / ClusterIP)
+│   │   ├── ingress.yaml    # Ingress config for external access
+│   │   ├── secrets.yaml    # Secure storage setup (linked to Google Secret Manager)
+│   │   ├── configmap.yaml  # Environment config for LEO API
+│   │
+│   ├── github-actions/    # CI/CD Pipelines
+│   │   ├── deploy.yml     # Deployment workflow (build, push to GCP)
+│   │   ├── test.yml       # Runs unit tests & integration tests
+│   │   ├── terraform.yml  # Automates Terraform infrastructure deployment
+│   │
+│   ├── docker/            # Docker configurations
+│   │   ├── Dockerfile     # Defines container for LEO backend
+│   │   ├── entrypoint.sh  # Startup script for containerized app
+│   │   ├── docker-compose.yml # Local development setup
+│   │
+│   ├── monitoring/        # Logging & monitoring setup
+│   │   ├── cloud_logging.tf  # GCP Cloud Logging configuration
+│   │   ├── alerting.tf       # Monitoring alerts (Google Cloud Monitoring)
+│
+│── README.md              # Project documentation
+│── LICENSE                # License file
+│── .gitignore             # Ignore files like __pycache__, .env, etc.
+“
