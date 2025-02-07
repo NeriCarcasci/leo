@@ -1,8 +1,19 @@
-import typer
+import os
+import subprocess
+import sys
 from modules.executor import CommandExecutionModule
 from modules.logger import LoggerModule
 from modules.secrets import SecretsModule
 from modules.config import ConfigModule
+
+def check_and_install_dependencies():
+    """Check if LEO is fully set up; if not, run `install.py`."""
+    try:
+        import typer
+        import questionary
+    except ImportError:
+        print("🔹 Dependencies not found. Installing them now...")
+        subprocess.run([sys.executable, "install.py"], check=True)
 
 class LeoCLI:
     def __init__(
@@ -44,6 +55,7 @@ class LeoCLI:
 
 def main():
     """Entry point for the CLI."""
+    check_and_install_dependencies()
     cli = LeoCLI()  # Instantiate with default modules
     cli.app()
 
