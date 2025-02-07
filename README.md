@@ -1,160 +1,47 @@
-🦁 LEO - AI-Powered Command Line Assistant 🚀
+# 🦁 LEO - AI-Powered Command Line Assistant 🚀
 
-📝 Overview
+## 📝 Overview
+LEO is an intelligent command-line assistant that transforms **natural language prompts** into accurate **system commands** using a **cloud-based Large Language Model (LLM)**.  
 
-LEO is an intelligent command-line assistant that transforms natural language prompts into accurate system commands using a cloud-based Large Language Model (LLM).
+Designed for **developers, sysadmins, and power users**, LEO provides **automated command execution, security, and logging**, making it an ideal assistant for **system administration, cloud operations, and development workflows**.  
 
-Designed for developers, sysadmins, and power users, LEO automates command execution, ensures security, and provides transparent logging, making it an ideal assistant for system administration, cloud operations, and development workflows.
+## 📂 Repository Structure
+LEO is now divided into three separate repositories for **better organization and scalability**:
 
-⚡ Key Features
+| Repository  | Description |
+|------------|------------|
+| **[leo](https://github.com/NeriCarcasci/leo)** | Main repository containing **documentation, testing, and project tracking**. |
+| **[leo-local](https://github.com/NeriCarcasci/leo-local)** | CLI tool for executing LEO commands locally. |
+| **[leo-cloud](https://github.com/NeriCarcasci/leo-cloud)** | Server-side execution engine, backend API, and cloud infrastructure. |
 
-✅ AI-Powered Command Generation – Converts natural language prompts into shell commands.
-🔍 Context-Aware Execution – Detects missing details and asks clarifying questions.
-🔑 Secure Secrets Management – Locally stores sensitive data and injects it securely.
-🤖 Autonomous & User-Controlled Modes – Supports automatic or manual execution approval.
-🛡️ Built-in Safety & Validation – Ensures commands are safe before execution.
-⚙️ Error Detection & Recovery – Logs output, detects errors, and retries when necessary.
-📜 Logging & Feedback System – Provides execution logs and transparent feedback.
-
-🏗️ Architecture Overview
-
-LEO follows a modular and structured execution pipeline for safety, accuracy, and flexibility:
-
-1️⃣ Command Line Interface – Captures user input.
-2️⃣ Safety & Context Analysis – Ensures prompt security and completeness.
-3️⃣ Interactive Questioning Module – Collects missing details from the user.
-4️⃣ Secrets Manager – Securely stores and injects credentials/API keys.
-5️⃣ Cloud LLM Service – Generates accurate shell commands.
-6️⃣ Command Generation Module – Formats and validates commands.
-7️⃣ Command Execution Center – Runs commands and collects output.
-8️⃣ Command Output Verification – Detects errors and verifies success.
-9️⃣ Assertion Commands Module – Runs additional checks to ensure correctness.
-🔟 Logging & Feedback Module – Logs execution details and provides insights.
-
-📌 Architecture Diagram Available in the repository for visual understanding.
-
-🛣️ Roadmap
-
-🔹 Phase 1: Core Development
-✔️ Implement CLI input handling
-✔️ Integrate LLM for command generation
-✔️ Add safety validation and context analysis
-✔️ Implement secrets management
-
-🔹 Phase 2: Execution & Verification
-✔️ Develop command execution and output collection
-✔️ Add error detection and automated recovery
-✔️ Implement assertion-based verification
-
-🔹 Phase 3: UX & Enhancements
-🔜 Improve interactive questioning for missing details
-🔜 Enhance user control over execution modes
-🔜 Optimize logging and feedback visualization
-
-🔹 Phase 4: Advanced Features
-🔜 Support for multi-step automation workflows
-🔜 Integration with external API services
-🔜 Plugin support for additional command sets
-
-📅 Ongoing: Bug fixes, security improvements, and community feedback incorporation.
-
-# 🦁 LEO - AI-Powered Command Line Assistant
-
-## 📂 Project Structure
-
-```
-LEO/
-│── client/                # CLI Tool (Python + Typer)
-│   ├── leo.py             # Main CLI entry point
-│   ├── config.py          # Stores API endpoint & settings
-│   ├── prompts.py         # Handles interactive questioning
-│   ├── executor.py        # Manages command execution (manual & autonomous)
-│   ├── logger.py          # Logs local CLI execution history
-│   ├── secrets.py         # Retrieves secrets from Google Secret Manager
-│   ├── requirements.txt   # Dependencies for CLI
-│
-│── server/                # Backend API & Execution Engine (FastAPI + Google Cloud)
-│   ├── main.py            # FastAPI entry point (routes & logic)
-│   ├── routes.py          # API endpoint definitions
-│   ├── vertex_ai.py       # Handles LLM calls to Google Vertex AI
-│   ├── execution_engine.py # Secure command execution in Docker/gVisor
-│   ├── db.py              # PostgreSQL connection & ORM models
-│   ├── models.py          # Data models for logs, execution tracking
-│   ├── logging.py         # Sends logs to Cloud Logging
-│   ├── security.py        # Handles authentication, permissions
-│   ├── secrets.py         # Loads credentials from Google Secret Manager
-│   ├── config.py          # Config settings for the API
-│   ├── requirements.txt   # Dependencies for FastAPI backend
-│
-│── infra/                 # Infrastructure as Code (IaC) + CI/CD + Monitoring
-│   ├── terraform/         # Terraform configs for GCP services
-│   │   ├── main.tf        # Main Terraform file defining infrastructure
-│   │   ├── gke.tf         # Kubernetes cluster setup
-│   │   ├── vertex_ai.tf   # Google Vertex AI configuration
-│   │   ├── cloud_sql.tf   # PostgreSQL Cloud SQL setup
-│   │   ├── storage.tf     # Google Cloud Storage for logs
-│   │   ├── secret_manager.tf # Secrets management setup
-│   │   ├── outputs.tf     # Output variables (API URL, DB credentials, etc.)
-│   │   ├── providers.tf   # Google Cloud provider configuration
-│   │   ├── variables.tf   # Configurable variables for Terraform
-│   │
-│   ├── kubernetes/        # Kubernetes manifests for GKE
-│   │   ├── deployment.yaml # Deployment config for LEO API
-│   │   ├── service.yaml    # Service config (LoadBalancer / ClusterIP)
-│   │   ├── ingress.yaml    # Ingress config for external access
-│   │   ├── secrets.yaml    # Secure storage setup (linked to Google Secret Manager)
-│   │   ├── configmap.yaml  # Environment config for LEO API
-│   │
-│   ├── github-actions/    # CI/CD Pipelines
-│   │   ├── deploy.yml     # Deployment workflow (build, push to GCP)
-│   │   ├── test.yml       # Runs unit tests & integration tests
-│   │   ├── terraform.yml  # Automates Terraform infrastructure deployment
-│   │
-│   ├── docker/            # Docker configurations
-│   │   ├── Dockerfile     # Defines container for LEO backend
-│   │   ├── entrypoint.sh  # Startup script for containerized app
-│   │   ├── docker-compose.yml # Local development setup
-│   │
-│   ├── monitoring/        # Logging & monitoring setup
-│   │   ├── cloud_logging.tf  # GCP Cloud Logging configuration
-│   │   ├── alerting.tf       # Monitoring alerts (Google Cloud Monitoring)
-│
-│── README.md              # Project documentation
-│── LICENSE                # License file
-│── .gitignore             # Ignore files like __pycache__, .env, etc.
-```
-
-## 📜 Description of Key Directories
-
-- **`client/`** → The CLI tool that allows users to interact with LEO.
-- **`server/`** → The backend API and execution engine that runs commands securely.
-- **`infra/`** → Infrastructure setup including Terraform, Kubernetes, CI/CD, and logging.
+Each repository is independently maintained but works together as part of the **LEO ecosystem**.
 
 ## 🚀 Getting Started
+### Clone Repositories
+```bash
+git clone https://github.com/NeriCarcasci/leo.git
+git clone https://github.com/NeriCarcasci/leo-local.git
+git clone https://github.com/NeriCarcasci/leo-cloud.git
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/LEO.git
-   cd LEO
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r client/requirements.txt
-   pip install -r server/requirements.txt
-   ```
-3. Deploy infrastructure using Terraform:
-   ```bash
-   cd infra/terraform
-   terraform init
-   terraform apply
-   ```
-4. Deploy the server using Kubernetes:
-   ```bash
-   kubectl apply -f infra/kubernetes/
-   ```
+### Install CLI Tool
+```bash
+cd leo-local
+python install.py
+```
+
+### Deploy Backend & Infrastructure
+```bash
+cd leo-cloud/infra/terraform
+terraform init
+terraform apply
+```
+```bash
+kubectl apply -f leo-cloud/infra/kubernetes/
+```
 
 ## 📌 Contributing
-Contributions are welcome! Open an issue or create a pull request to improve LEO.
+Contributions are welcome! Open an **issue** or create a **pull request** to improve LEO.
 
 ## 📜 License
 This project is licensed under the **MIT License**.
