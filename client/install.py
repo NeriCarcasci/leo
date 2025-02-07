@@ -2,12 +2,27 @@ import os
 import sys
 import platform
 import subprocess
-import questionary
 import json
 
 CONFIG_DIR = os.path.expanduser("~/.leo_cli")
 VENV_DIR = os.path.join(CONFIG_DIR, "venv")
 CONFIG_FILE = os.path.join(CONFIG_DIR, "config.json")
+
+def install_pip_and_questionary():
+    """Ensure `pip` and `questionary` are available before running setup."""
+    try:
+        import questionary
+    except ImportError:
+        print("🔹 `questionary` not found. Installing it first...")
+
+        subprocess.run([sys.executable, "-m", "ensurepip"], check=True)
+        subprocess.run([sys.executable, "-m", "pip", "install", "--upgrade", "pip"], check=True)
+        subprocess.run([sys.executable, "-m", "pip", "install", "questionary"], check=True)
+        
+        print("✅ Installed `questionary`. Restarting installation...\n")
+        os.execv(sys.executable, [sys.executable] + sys.argv)  # Restart the script
+
+import questionary  # Now it's safe to import
 
 def create_virtualenv():
     """Create a virtual environment for LEO CLI if it doesn't exist."""
@@ -61,8 +76,11 @@ def detect_and_store_os():
 
 if __name__ == "__main__":
     print("🚀 Setting up LEO CLI...")
+
+    install_pip_and_questionary()  # Ensure dependencies before running anything else
     create_virtualenv()
     install_dependencies()
     detect_and_store_os()
     add_to_path()
+
     print("🎉 LEO CLI is ready! You can now use `leo.py` from the terminal.")
