@@ -1,1 +1,8 @@
 # Dependencies list
+typer[all]
+questionary
+json
+os
+sys
+subprocess
+platform
